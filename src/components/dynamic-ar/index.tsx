@@ -52,7 +52,7 @@ function Lift({
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
     });
-  }, [scene]);
+  }, [selectedPart, selectedMaterial, nodes, materials]);
 
   return <primitive object={scene} />;
 }
