@@ -30,6 +30,9 @@ export default function ARScene() {
         renderer.xr.enabled = true;
         document.body.appendChild(ARButton.createButton(renderer));
 
+        const light = new THREE.AmbientLight(0x404040); // soft white light
+        scene.add(light);
+
         renderer.setAnimationLoop(() => {
           renderer.render(scene, camera);
         });
