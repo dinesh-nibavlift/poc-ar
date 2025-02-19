@@ -1,7 +1,7 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo } from "react";
 
-import { useEliteConfigContext } from '@/context/elite-config.context';
-import { getConfigMaterial } from '@/utils/functions/elite-config';
+import { useEliteConfigContext } from "@/context/elite-config.context";
+import { getConfigMaterial } from "@/utils/functions/elite-config";
 
 interface ILiftCabinModalProps {}
 
@@ -9,17 +9,24 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
   const {} = props;
 
   const { config, nodes, materials, textures } = useEliteConfigContext();
+
   const cabinAccentMaterial = useMemo(() => {
-    if (materials && config.cabinAccent && materials?.[config.cabinAccent]) {
-      return materials?.[config.cabinAccent];
+    if (textures && config.cabinAccent && textures?.[config.cabinAccent]) {
+      return textures?.[config.cabinAccent];
     }
-  }, [config.cabinAccent, materials]);
+  }, [config.cabinAccent, textures]);
 
   const sideGCabinMaterial = useMemo(() => {
     const cabinSides = config.cabinSides || [];
-    const sideGValues = cabinSides.find((cabinWall) => cabinWall.side === 'side-g');
+    const sideGValues = cabinSides.find(
+      (cabinWall) => cabinWall.side === "side-g"
+    );
 
-    const newMaterial = getConfigMaterial(sideGValues?.cabinWall, textures, materials);
+    const newMaterial = getConfigMaterial(
+      sideGValues?.cabinWall,
+      textures,
+      materials
+    );
     return newMaterial;
   }, [config.cabinSides, materials]);
 
@@ -28,7 +35,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes['1'].geometry}
+        geometry={nodes["1"].geometry}
         material={cabinAccentMaterial}
         position={[0.523, 1.009, -0.047]}
         rotation={[Math.PI, 0, Math.PI]}
@@ -37,7 +44,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes['2'].geometry}
+        geometry={nodes["2"].geometry}
         material={cabinAccentMaterial}
         position={[0.523, 1.06, -0.047]}
         rotation={[Math.PI, 0, Math.PI]}
@@ -52,31 +59,35 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
         rotation={[Math.PI, 0, Math.PI]}
         scale={0.985}
       />
-      <group position={[0, 0, -0.05]} rotation={[Math.PI, 0, Math.PI]} scale={0.985}>
+      <group
+        position={[0, 0, -0.05]}
+        rotation={[Math.PI, 0, Math.PI]}
+        scale={0.985}
+      >
         <group rotation={[Math.PI / 2, 0, -Math.PI / 2]}>
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes['EP-2-Elite_cabin_assy_ref002'].geometry}
+            geometry={nodes["EP-2-Elite_cabin_assy_ref002"].geometry}
             material={cabinAccentMaterial}
           />
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes['EP-2-Elite_cabin_assy_ref002_1'].geometry}
+            geometry={nodes["EP-2-Elite_cabin_assy_ref002_1"].geometry}
             material={sideGCabinMaterial}
           />
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes['EP-2-Elite_cabin_assy_ref002_2'].geometry}
-            material={materials['Logo emission']}
+            geometry={nodes["EP-2-Elite_cabin_assy_ref002_2"].geometry}
+            material={materials["Logo emission"]}
           />
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes['3d-model'].geometry}
-            material={materials['Metal.001']}
+            geometry={nodes["3d-model"].geometry}
+            material={materials["Metal.001"]}
             position={[-0.001, -0.531, -0.797]}
             rotation={[0, 0, -Math.PI]}
             scale={-0.003}
@@ -124,7 +135,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
             castShadow
             receiveShadow
             geometry={nodes.Side_A.geometry}
-            material={materials['Cabin interior']}
+            material={materials["Cabin interior"]}
             position={[0.712, -0.011, -1.011]}
             rotation={[0, 0, Math.PI / 2]}
           />
@@ -132,14 +143,27 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
             castShadow
             receiveShadow
             geometry={nodes.Side_B.geometry}
-            material={materials['Cabin interior']}
+            material={materials["Cabin interior"]}
             position={[-0.007, 0.567, -1.013]}
             rotation={[0, -Math.PI / 2, 0]}
           />
         </group>
-        <group position={[-0.214, 0.971, 0.589]} rotation={[Math.PI / 2, -Math.PI / 2, 0]}>
-          <mesh castShadow receiveShadow geometry={nodes.Plane078.geometry} material={cabinAccentMaterial} />
-          <mesh castShadow receiveShadow geometry={nodes.Plane078_1.geometry} material={materials.Glass} />
+        <group
+          position={[-0.214, 0.971, 0.589]}
+          rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane078.geometry}
+            material={cabinAccentMaterial}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane078_1.geometry}
+            material={materials.Glass}
+          />
           <mesh
             castShadow
             receiveShadow
@@ -148,9 +172,22 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
             position={[0, 0, -0.228]}
           />
         </group>
-        <group position={[0.238, 0.971, 0.638]} rotation={[Math.PI / 2, -Math.PI / 2, 0]}>
-          <mesh castShadow receiveShadow geometry={nodes.Plane081.geometry} material={cabinAccentMaterial} />
-          <mesh castShadow receiveShadow geometry={nodes.Plane081_1.geometry} material={materials.Glass} />
+        <group
+          position={[0.238, 0.971, 0.638]}
+          rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane081.geometry}
+            material={cabinAccentMaterial}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane081_1.geometry}
+            material={materials.Glass}
+          />
         </group>
         <mesh
           castShadow
@@ -161,9 +198,23 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           rotation={[Math.PI / 2, -Math.PI / 2, 0]}
         />
       </group>
-      <group position={[0.523, 1.281, -0.047]} rotation={[Math.PI, 0, Math.PI]} scale={0.985}>
-        <mesh castShadow receiveShadow geometry={nodes.Cube032.geometry} material={materials.Display} />
-        <mesh castShadow receiveShadow geometry={nodes.Cube032_1.geometry} material={materials['Plastic.001']} />
+      <group
+        position={[0.523, 1.281, -0.047]}
+        rotation={[Math.PI, 0, Math.PI]}
+        scale={0.985}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube032.geometry}
+          material={materials.Display}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube032_1.geometry}
+          material={materials["Plastic.001"]}
+        />
       </group>
       <mesh
         castShadow
@@ -178,7 +229,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           castShadow
           receiveShadow
           geometry={nodes.Cube014.geometry}
-          material={materials['Emission light.002']}
+          material={materials["Emission light.002"]}
           position={[-0.642, 0, -0.012]}
           rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
           scale={[-0.425, -0.002, -0.009]}
@@ -187,7 +238,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           castShadow
           receiveShadow
           geometry={nodes.Cube018.geometry}
-          material={materials['Emission light.002']}
+          material={materials["Emission light.002"]}
           position={[0.642, 0, -0.012]}
           rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
           scale={[-0.418, -0.002, -0.009]}
@@ -196,7 +247,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           castShadow
           receiveShadow
           geometry={nodes.Cube024.geometry}
-          material={materials['Emission light.002']}
+          material={materials["Emission light.002"]}
           position={[0.003, 0.492, -0.012]}
           rotation={[-Math.PI / 2, 0, 0]}
           scale={[-0.578, -0.002, -0.009]}
@@ -205,7 +256,7 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           castShadow
           receiveShadow
           geometry={nodes.Cube027.geometry}
-          material={materials['Emission light.002']}
+          material={materials["Emission light.002"]}
           position={[0.003, -0.493, -0.012]}
           rotation={[-Math.PI / 2, 0, 0]}
           scale={[-0.572, -0.002, -0.009]}
@@ -214,14 +265,14 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes['EP-2-Elite_cabin_assy_ref005'].geometry}
-            material={materials['Emission light.001']}
+            geometry={nodes["EP-2-Elite_cabin_assy_ref005"].geometry}
+            material={materials["Emission light.001"]}
           />
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes['EP-2-Elite_cabin_assy_ref005_1'].geometry}
-            material={materials['Second colour.001']}
+            geometry={nodes["EP-2-Elite_cabin_assy_ref005_1"].geometry}
+            material={materials["Second colour.001"]}
           />
         </group>
         <mesh

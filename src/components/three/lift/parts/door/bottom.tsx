@@ -1,40 +1,47 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo } from "react";
 
-import LiftCabinLock from './lock';
+import LiftCabinLock from "./lock";
 
-import { useEliteConfigContext } from '@/context/elite-config.context';
-import { useMaterials } from '@/hooks/useMaterials';
-import { ralColorOptions } from '@/utils/constant/configurator';
+import { useEliteConfigContext } from "@/context/elite-config.context";
 
 interface ILiftBottomDoorModalProps {}
 
 const LiftBottomDoorModal: FC<ILiftBottomDoorModalProps> = (props) => {
   const {} = props;
-  const { config, nodes, materials } = useEliteConfigContext();
+  const { config, nodes, materials, textures } = useEliteConfigContext();
 
-  const { ralCreamWhite, ralAshenGray, ralMidNightBlack, ralPureWhite } = useMaterials();
-
-  const doorMaterial: any = useMemo(() => {
-    if (config.landingDoorColor === ralColorOptions.ralCreamWhite) {
-      return ralCreamWhite;
-    } else if (config.landingDoorColor === ralColorOptions.ralAshenGray) {
-      return ralAshenGray;
-    } else if (config.landingDoorColor === ralColorOptions.ralMidNightBlack) {
-      return ralMidNightBlack;
-    } else if (config.landingDoorColor === ralColorOptions.ralPureWhite) {
-      return ralPureWhite;
-    } else {
-      return {};
+  const doorMaterial = useMemo(() => {
+    if (
+      textures &&
+      config.landingDoorColor &&
+      textures?.[config.landingDoorColor]
+    ) {
+      return textures?.[config.landingDoorColor];
     }
-  }, [config.landingDoorColor, ralCreamWhite, ralAshenGray, ralMidNightBlack, ralPureWhite]);
-
-  console.log(doorMaterial);
+  }, [config.landingDoorColor, textures]);
 
   return (
-    <group position={[-0.219, 1.158, -0.613]} rotation={[Math.PI, 0, Math.PI]} scale={0.985}>
-      <group position={[-0.3, -0.095, 0.107]} rotation={[Math.PI / 2, -Math.PI / 2, 0]}>
-        <mesh castShadow receiveShadow geometry={nodes.Plane037.geometry} material={doorMaterial} />
-        <mesh castShadow receiveShadow geometry={nodes.Plane037_1.geometry} material={materials.Glass} />
+    <group
+      position={[-0.219, 1.158, -0.613]}
+      rotation={[Math.PI, 0, Math.PI]}
+      scale={0.985}
+    >
+      <group
+        position={[-0.3, -0.095, 0.107]}
+        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Plane037.geometry}
+          material={doorMaterial}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Plane037_1.geometry}
+          material={materials.Glass}
+        />
         <mesh
           castShadow
           receiveShadow
@@ -43,9 +50,22 @@ const LiftBottomDoorModal: FC<ILiftBottomDoorModalProps> = (props) => {
           position={[0, 0, -0.228]}
         />
       </group>
-      <group position={[0.152, -0.095, 0.059]} rotation={[Math.PI / 2, -Math.PI / 2, 0]}>
-        <mesh castShadow receiveShadow geometry={nodes.Plane031.geometry} material={doorMaterial} />
-        <mesh castShadow receiveShadow geometry={nodes.Plane031_1.geometry} material={materials.Glass} />
+      <group
+        position={[0.152, -0.095, 0.059]}
+        rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Plane031.geometry}
+          material={doorMaterial}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Plane031_1.geometry}
+          material={materials.Glass}
+        />
       </group>
       <LiftCabinLock nodes={nodes} materials={materials} />
       <mesh

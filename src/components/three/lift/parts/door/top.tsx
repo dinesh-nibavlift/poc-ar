@@ -6,13 +6,17 @@ interface ILiftTopDoorModalProps {}
 
 const LiftTopDoorModal: FC<ILiftTopDoorModalProps> = (props) => {
   const {} = props;
-  const { config, nodes, materials } = useEliteConfigContext();
+  const { config, nodes, materials, textures } = useEliteConfigContext();
 
   const doorMaterial = useMemo(() => {
-    if (materials && config.landingDoorColor && materials?.[config.landingDoorColor]) {
-      return materials?.[config.landingDoorColor];
+    if (
+      textures &&
+      config.landingDoorColor &&
+      textures?.[config.landingDoorColor]
+    ) {
+      return textures?.[config.landingDoorColor];
     }
-  }, [config.landingDoorColor]);
+  }, [config.landingDoorColor, textures]);
 
   return (
     <group position={[0.002, 4.905, -0.711]}>
