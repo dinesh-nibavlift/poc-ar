@@ -22,7 +22,7 @@ export default function LiftModal() {
   }, []);
 
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full min-md:h-full h-[100vh]  min-mg:overflow-hidden overflow-y-scroll ">
       <EliteConfigProvider
         nodes={nodes}
         materials={materials}
@@ -30,9 +30,9 @@ export default function LiftModal() {
       >
         <div
           ref={ref}
-          className="mt-[8dvh] grid grid-cols-[auto_393px] max-lg:grid-cols-1 max-lg:pt-[10dvh] max-lg:h-auto config-option-class"
+          className="grid grid-cols-[auto_393px] max-lg:grid-cols-1 max-lg:pt-[10dvh] max-lg:h-auto config-option-class"
         >
-          <div className="h-full flex flex-col asset-wrapper">
+          <div className="flex flex-col asset-wrapper min-md:h-full h-[50vh]">
             {/* Preview  */}
             <div className="h-full items-center flex justify-center">
               <div

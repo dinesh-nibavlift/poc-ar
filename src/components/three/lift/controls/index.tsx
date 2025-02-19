@@ -104,14 +104,14 @@ const LiftControls: FC<ILiftControlsProps> = (props) => {
       />
 
       <div className="w-full">
-        <button
+        <div
           onClick={() => {
             vrStore.enterAR();
           }}
-          className=" rounded-lg bg-blue-500 w-full h-auto p-2 text-white"
+          className="rounded-lg bg-blue-500 w-full h-auto p-2 text-white bg-blue flex justify-center items-center"
         >
           Enter VR
-        </button>
+        </div>
       </div>
     </div>
   );

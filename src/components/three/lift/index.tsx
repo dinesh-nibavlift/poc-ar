@@ -33,9 +33,7 @@ const LiftView = (props: any) => {
       />
       <OrbitControls enableZoom={false} />
       <XR store={vrStore}>
-        <Center>
-          <Lift material={props?.material} />
-        </Center>
+        <Lift material={props?.material} />
       </XR>
     </>
   );

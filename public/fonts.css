@@ -1,0 +1,62 @@
+/* Gotham - Book */
+@font-face {
+  font-family: 'gotham-book';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('./fonts/gotham-ssm-book.otf') format('opentype');
+}
+
+/* Gotham - Medium */
+@font-face {
+  font-family: 'gotham-medium';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/gotham-ssm-medium.otf') format('opentype');
+}
+
+/* Gotham - Bold */
+@font-face {
+  font-family: 'gotham-bold';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('./fonts/gotham-ssm-bold.otf') format('opentype');
+}
+
+/* Porsche - Thin */
+@font-face {
+  font-family: 'porsche-book';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./fonts/porsche-next-thin.otf') format('opentype');
+}
+
+/* Porsche - Regular */
+@font-face {
+  font-family: 'porsche-medium';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/porsche-next-regular.otf') format('opentype');
+}
+
+/* Porsche - Semi Bold */
+@font-face {
+  font-family: 'porsche-semi-bold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./fonts/porsche-next-semibold.otf') format('opentype');
+}
+
+/* Porsche - Bold */
+@font-face {
+  font-family: 'porsche-bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/porsche-next-bold.otf') format('opentype');
+}

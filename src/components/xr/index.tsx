@@ -2,9 +2,11 @@
 
 import { Canvas } from "@react-three/fiber";
 import { Environment, useGLTF } from "@react-three/drei";
-import { XR, createXRStore } from "@react-three/xr";
+import { XR, XROrigin, createXRStore } from "@react-three/xr";
 
-const store = createXRStore();
+const store = createXRStore({
+  customSessionInit: { requiredFeatures: ["hit-test"] },
+});
 
 function Model() {
   const { scene } = useGLTF("/lift-modal.glb");
@@ -19,7 +21,7 @@ export default function ARScene() {
         <ambientLight intensity={100} />
         <pointLight position={[2, 2, 2]} />
         <Environment files="/indoor.exr" />
-        <XR store={store}>
+        <XR store={store}>          
           <Model />
         </XR>
       </Canvas>
