@@ -1,6 +1,6 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo } from "react";
 
-import { useEliteConfigContext } from '@/context/elite-config.context';
+import { useEliteConfigContext } from "@/context/elite-config.context";
 
 interface ILiftCabinLockProps {
   nodes: any;
@@ -8,13 +8,15 @@ interface ILiftCabinLockProps {
 }
 
 const LiftCabinLock: FC<ILiftCabinLockProps> = (props) => {
-  const { nodes, materials } = props;
-
-  const { config } = useEliteConfigContext();
+  const { config, nodes, materials, textures } = useEliteConfigContext();
 
   const doorMaterial = useMemo(() => {
-    if (materials && config.landingDoorColor && materials?.[config.landingDoorColor]) {
-      return materials?.[config.landingDoorColor];
+    if (
+      textures &&
+      config.landingDoorColor &&
+      textures?.[config.landingDoorColor]
+    ) {
+      return textures?.[config.landingDoorColor];
     }
   }, [config.landingDoorColor]);
 
@@ -33,12 +35,17 @@ const LiftCabinLock: FC<ILiftCabinLockProps> = (props) => {
           rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
           scale={[0.929, 0.704, 0.812]}
         >
-          <mesh castShadow receiveShadow geometry={nodes.Cube036.geometry} material={materials['Display.001']} />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube036.geometry}
+            material={materials["Display.001"]}
+          />
           <mesh
             castShadow
             receiveShadow
             geometry={nodes.Cube036_1.geometry}
-            material={materials['Stainless Steel.002']}
+            material={materials["Stainless Steel.002"]}
           />
         </group>
       </mesh>

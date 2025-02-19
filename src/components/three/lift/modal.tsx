@@ -18,7 +18,6 @@ const Lift = (props: any) => {
   const { config } = useEliteConfigContext();
 
   const { session: isPresenting } = useXR();
-  console.log({ isPresenting });
 
   const position = useMemo(() => {
     if (isPresenting) {

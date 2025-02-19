@@ -2,13 +2,22 @@ import { FC, useMemo } from "react";
 
 import { useEliteConfigContext } from "@/context/elite-config.context";
 import { getConfigMaterial } from "@/utils/functions/elite-config";
+import { useGLTF } from "@react-three/drei";
 
 interface ILiftCabinModalProps {}
 
 const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
   const {} = props;
 
+  const { nodes: elightLightNode } = useGLTF(
+    "/elite-config/glb/elite-light.glb"
+  ) as any;
+
   const { config, nodes, materials, textures } = useEliteConfigContext();
+
+  const isElightLight = useMemo(() => {
+    return config?.ceiling === "logo";
+  }, [config.ceiling]);
 
   const cabinAccentMaterial = useMemo(() => {
     if (textures && config.cabinAccent && textures?.[config.cabinAccent]) {
@@ -216,6 +225,98 @@ const LiftCabinModal: FC<ILiftCabinModalProps> = (props) => {
           material={materials["Plastic.001"]}
         />
       </group>
+      {isElightLight ? (
+        <group position={[-0.17, -0.17, 0]} rotation={[0, Math.PI / 2, 0]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={elightLightNode.EP_lift_Ceiling_frame_cabin001.geometry}
+            material={cabinAccentMaterial}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={elightLightNode.Elite_Top.geometry}
+              material={cabinAccentMaterial}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={elightLightNode.Square_Light002.geometry}
+              material={materials["Emission light.001"]}
+            />
+          </mesh>
+        </group>
+      ) : (
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.EP_lift_Ceiling_frame_cabin.geometry}
+          material={cabinAccentMaterial}
+          position={[-0.001, 1.954, -0.05]}
+          rotation={[Math.PI / 2, 0, Math.PI / 2]}
+          scale={0.985}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube014.geometry}
+            material={materials["Emission light.002"]}
+            position={[-0.642, 0, -0.012]}
+            rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
+            scale={[-0.425, -0.002, -0.009]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube018.geometry}
+            material={materials["Emission light.002"]}
+            position={[0.642, 0, -0.012]}
+            rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
+            scale={[-0.418, -0.002, -0.009]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube024.geometry}
+            material={materials["Emission light.002"]}
+            position={[0.003, 0.492, -0.012]}
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[-0.578, -0.002, -0.009]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube027.geometry}
+            material={materials["Emission light.002"]}
+            position={[0.003, -0.493, -0.012]}
+            rotation={[-Math.PI / 2, 0, 0]}
+            scale={[-0.572, -0.002, -0.009]}
+          />
+          <group position={[0, 0, -0.006]} scale={[1.094, 0.849, 1]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes["EP-2-Elite_cabin_assy_ref005"].geometry}
+              material={materials["Emission light.001"]}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes["EP-2-Elite_cabin_assy_ref005_1"].geometry}
+              material={materials["Second colour.001"]}
+            />
+          </group>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Top.geometry}
+            material={cabinAccentMaterial}
+            position={[0, -0.001, -0.173]}
+            rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
+          />
+        </mesh>
+      )}
       <mesh
         castShadow
         receiveShadow
