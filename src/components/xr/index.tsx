@@ -18,10 +18,10 @@ export default function ARScene() {
       <Canvas>
         <ambientLight intensity={100} />
         <pointLight position={[2, 2, 2]} />
+        <Environment files="/indoor.exr" />
         <XR store={store}>
           <Model />
         </XR>
-        <Environment files="/indoor.exr" />
       </Canvas>
     </div>
   );
