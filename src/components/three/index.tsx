@@ -22,7 +22,7 @@ export default function LiftModal() {
   }, []);
 
   return (
-    <div className="w-full min-md:h-full h-[100vh]  min-mg:overflow-hidden overflow-y-scroll ">
+    <div className="w-full min-md:h-full h-[100vh] mt-[2dvh]  min-mg:overflow-hidden overflow-y-scroll ">
       <EliteConfigProvider
         nodes={nodes}
         materials={materials}

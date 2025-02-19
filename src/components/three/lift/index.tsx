@@ -3,17 +3,13 @@
 import React, { useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import dynamic from "next/dynamic";
-import {
-  Center,
-  Environment,
-  OrbitControls,
-  useProgress,
-} from "@react-three/drei";
+import { Environment, OrbitControls, useProgress } from "@react-three/drei";
 
 import { useEliteConfigContext } from "@/context/elite-config.context";
 import { CAMERA_ANGLES } from "@/utils/constant/configurator";
 import useSetState from "@/hooks/useSetState";
 import { XR } from "@react-three/xr";
+import LazyComponent from "../lazy-loading";
 
 const Lift = dynamic(() => import("./modal"), { ssr: false });
 
@@ -58,6 +54,10 @@ export const ModalWrapper = () => {
   return (
     <div className="relative w-full h-full">
       <div className="w-full h-full">
+        <LazyComponent
+          isLoading={state.isLoading}
+          dataTestId="modal-lazy-loading"
+        />
         <Canvas>
           {config.cameraAngles === CAMERA_ANGLES.OUTER ? (
             <CameraController position={[-6.5, 0, 0]} />
