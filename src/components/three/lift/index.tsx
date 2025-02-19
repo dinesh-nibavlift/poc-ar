@@ -13,14 +13,12 @@ import {
 import { useEliteConfigContext } from "@/context/elite-config.context";
 import { CAMERA_ANGLES } from "@/utils/constant/configurator";
 import useSetState from "@/hooks/useSetState";
-import { XR, createXRStore } from "@react-three/xr";
-
-const store = createXRStore();
+import { XR } from "@react-three/xr";
 
 const Lift = dynamic(() => import("./modal"), { ssr: false });
 
 const LiftView = (props: any) => {
-  const { config } = useEliteConfigContext();
+  const { config, vrStore } = useEliteConfigContext();
 
   return (
     <>
@@ -34,7 +32,7 @@ const LiftView = (props: any) => {
         }
       />
       <OrbitControls enableZoom={false} />
-      <XR store={store}>
+      <XR store={vrStore}>
         <Center>
           <Lift material={props?.material} />
         </Center>
@@ -61,13 +59,6 @@ export const ModalWrapper = () => {
 
   return (
     <div className="relative w-full h-full">
-      <button
-        onClick={() => {
-          store.enterAR();
-        }}
-      >
-        Enter VR
-      </button>
       <div className="w-full h-full">
         <Canvas>
           {config.cameraAngles === CAMERA_ANGLES.OUTER ? (

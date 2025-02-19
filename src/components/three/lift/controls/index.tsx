@@ -1,34 +1,41 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo } from "react";
 
-import LiftControlApplication from './application';
-import LandingDoorOptions from './landing-door-color';
-import CabinWall from './cabin-wall.tsx';
+import LiftControlApplication from "./application";
+import LandingDoorOptions from "./landing-door-color";
+import CabinWall from "./cabin-wall.tsx";
 
-import { useEliteConfigContext } from '@/context/elite-config.context';
+import { useEliteConfigContext } from "@/context/elite-config.context";
 import {
   applicationOptions,
   cabinWallOptions,
   cameraAngleOptions,
   ceilingOptions,
-  landingDoorOptions
-} from '@/utils/constant/configurator';
+  landingDoorOptions,
+} from "@/utils/constant/configurator";
 
 interface ILiftControlsProps {}
 
 const LiftControls: FC<ILiftControlsProps> = (props) => {
-  const { config, setConfig } = useEliteConfigContext();
+  const { config, setConfig, vrStore } = useEliteConfigContext();
 
   const SideGCabinWallValue = useMemo(() => {
     const cabinSides = config.cabinSides || [];
-    const sideGValues = cabinSides.find((cabinWall) => cabinWall.side === 'side-g');
-    return sideGValues?.cabinWall || '';
+    const sideGValues = cabinSides.find(
+      (cabinWall) => cabinWall.side === "side-g"
+    );
+    return sideGValues?.cabinWall || "";
   }, [config.cabinSides]);
 
   const handleChangeCabin = (cabinWall: string) => {
-    const findIndex = config.cabinSides?.findIndex((cabinSide) => cabinSide.side === 'side-g');
+    const findIndex = config.cabinSides?.findIndex(
+      (cabinSide) => cabinSide.side === "side-g"
+    );
 
     if (findIndex === -1) {
-      const newCabinSides = [...config.cabinSides, { side: 'side-g', cabinWall }];
+      const newCabinSides = [
+        ...config.cabinSides,
+        { side: "side-g", cabinWall },
+      ];
       setConfig({ cabinSides: newCabinSides });
     } else {
       const newCabinSides = [...config.cabinSides];
@@ -95,6 +102,17 @@ const LiftControls: FC<ILiftControlsProps> = (props) => {
         handleChangeTab={handleCameraAngles}
         selectedValue={config.cameraAngles}
       />
+
+      <div className="w-full">
+        <button
+          onClick={() => {
+            vrStore.enterAR();
+          }}
+          className=" rounded-lg bg-blue-500 w-full h-auto p-2 text-white"
+        >
+          Enter VR
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,11 @@
-'use client';
-import { ReactElement, createContext, useContext } from 'react';
+"use client";
+import { ReactElement, createContext, useContext } from "react";
 
-import useSetState from '@/hooks/useSetState';
-import { CAMERA_ANGLES } from '@/utils/constant/configurator';
+import useSetState from "@/hooks/useSetState";
+import { CAMERA_ANGLES } from "@/utils/constant/configurator";
+
+import { createXRStore } from "@react-three/xr";
+const store = createXRStore();
 
 interface IInitialContextValues {
   config: IConfigState;
@@ -10,6 +13,7 @@ interface IInitialContextValues {
   nodes: any;
   materials: any;
   textures: any;
+  vrStore: any;
 }
 
 interface ICabinSides {
@@ -32,21 +36,21 @@ interface IConfigState {
 }
 
 const initialConfigValues = {
-  application: '',
-  landingDoorColor: 'RAL-Cream white',
-  cabinAccent: 'RAL-Cream white',
-  cabinDoorFinish: 'RAL-Cream white',
-  floorColor: '',
-  ceiling: '',
+  application: "",
+  landingDoorColor: "RAL-Cream white",
+  cabinAccent: "RAL-Cream white",
+  cabinDoorFinish: "RAL-Cream white",
+  floorColor: "",
+  ceiling: "",
   hasShaft: false,
   cabinSides: [
     {
-      side: 'side-g',
-      cabinWall: 'Mirror'
-    }
+      side: "side-g",
+      cabinWall: "Mirror",
+    },
   ],
-  shaft: 'RAL-Cream white',
-  cameraAngles: CAMERA_ANGLES.OUTER
+  shaft: "RAL-Cream white",
+  cameraAngles: CAMERA_ANGLES.OUTER,
 };
 
 const initialContextValues: IInitialContextValues = {
@@ -54,7 +58,8 @@ const initialContextValues: IInitialContextValues = {
   setConfig: (config: Partial<IConfigState>) => {},
   nodes: {},
   materials: {},
-  textures: {}
+  textures: {},
+  vrStore: null,
 };
 
 export const EliteConfigContext = createContext(initialContextValues);
@@ -62,7 +67,12 @@ export const EliteConfigContext = createContext(initialContextValues);
 interface IEliteConfigProvider extends ICommonLiftModalProps {
   children: ReactElement;
 }
-const EliteConfigProvider = ({ children, nodes, textures, materials }: IEliteConfigProvider) => {
+const EliteConfigProvider = ({
+  children,
+  nodes,
+  textures,
+  materials,
+}: IEliteConfigProvider) => {
   const [config, setConfig] = useSetState<IConfigState>(initialConfigValues);
 
   return (
@@ -72,7 +82,8 @@ const EliteConfigProvider = ({ children, nodes, textures, materials }: IEliteCon
         setConfig,
         nodes: nodes,
         materials: materials,
-        textures: textures
+        textures: textures,
+        vrStore: store,
       }}
     >
       {children}
