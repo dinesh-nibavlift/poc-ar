@@ -61,6 +61,13 @@ export const ModalWrapper = () => {
 
   return (
     <div className="relative w-full h-full">
+      <button
+        onClick={() => {
+          store.enterAR();
+        }}
+      >
+        Enter VR
+      </button>
       <div className="w-full h-full">
         <Canvas>
           {config.cameraAngles === CAMERA_ANGLES.OUTER ? (
